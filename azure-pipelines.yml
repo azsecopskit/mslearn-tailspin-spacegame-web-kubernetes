@@ -6,7 +6,7 @@ variables:
   leaderboardRepository: 'leaderboard'  
   webRepository: 'web'
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'H/SPVuI7l2nTbNoqqpX9KPVG87T=bguW'
+  imagePullSecret: 'secret'
 
 stages:
 - stage: 'Build'
@@ -24,7 +24,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(webRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
-        containerRegistry: 'ACR'
+        containerRegistry: 'Container Registry Connection'
         tags: |
           $(tag)
     - task: Docker@2
@@ -34,7 +34,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(leaderboardRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.LeaderboardContainer/Dockerfile'
-        containerRegistry: 'ACR'
+        containerRegistry: 'Container Registry Connection'
         tags: |
           $(tag)
 
